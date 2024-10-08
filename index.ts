@@ -50,7 +50,7 @@ export class PaginationService {
     table: any,
     page: number,
     limit: number,
-    order: string
+    orderBy: string
   ) {
     const count = await table.count({});
     const { take, skip, currentPage, lastPage } = this.paginationBuilder(
@@ -61,7 +61,7 @@ export class PaginationService {
     const rows = await table.findMany({
       skip,
       take,
-      order,
+      orderBy,
     });
     return { count, currentPage, lastPage, limit: take, rows };
   }
@@ -70,7 +70,7 @@ export class PaginationService {
     page: number,
     limit: number,
     search: string,
-    order: string
+    orderBy: string
   ) {
     const where = search;
     const count = await table.count({ where });
@@ -83,7 +83,7 @@ export class PaginationService {
       where,
       skip,
       take,
-      order,
+      orderBy,
     });
     return { count, currentPage, lastPage, limit: take, rows };
   }
@@ -99,12 +99,12 @@ export class PaginationService {
     page: number,
     limit: number,
     search: any,
-    order: any
+    orderBy: any
   ) {
     if (this.checkSearch(search)) {
-      return this.getPagingDataWithoutSearch(table, page, limit, order);
+      return this.getPagingDataWithoutSearch(table, page, limit, orderBy);
     } else {
-      return this.getPagingDataWithSearch(table, page, limit, search, order);
+      return this.getPagingDataWithSearch(table, page, limit, search, orderBy);
     }
   }
 }
