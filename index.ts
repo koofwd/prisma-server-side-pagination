@@ -98,8 +98,8 @@ export class PaginationService {
     table: any,
     page: number,
     limit: number,
-    search: string,
-    order: string
+    search: any,
+    order: any
   ) {
     if (this.checkSearch(search)) {
       return this.getPagingDataWithoutSearch(table, page, limit, order);
