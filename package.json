@@ -1,0 +1,17 @@
+{
+  "name": "prisma-server-side-pagination",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://wwww.github.com/koofwd/prisma-server-side-pagination.git"},
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "prisma-server-side-pagination"
+  ],
+  "author": "koofwd (https://www.github.com/koofwd)",
+  "license": "MIT",
+  "description": ""
+}
