@@ -4,7 +4,7 @@
   "main": "index.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://wwww.github.com/koofwd/prisma-server-side-pagination.git"},
+    "url": "https://wwww.github.com/koofwd/prisma-server-side-pagination.git"},
   "scripts": {
     "test": "npm run test"
   },
