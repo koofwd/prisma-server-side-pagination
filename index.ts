@@ -2,6 +2,7 @@ export class PaginationService {
   max_limit: number;
   min_limit: number;
   default_limit: number;
+
   constructor() {
     this.max_limit = 1000;
     this.min_limit = 1;
@@ -32,6 +33,14 @@ export class PaginationService {
   private pageSkip(page: number, limit: number) {
     return (page - 1) * limit < 0 ? 0 : (page - 1) * limit;
   }
+  private sortQueryBuilder(column: string, sort: string) {
+    let sortQuery = [
+      {
+        [column]: sort,
+      },
+    ];
+    return sortQuery;
+  }
   private checkSearch(search: string) {
     if (search === "" || search === null) {
       return true;
@@ -50,7 +59,7 @@ export class PaginationService {
     table: any,
     page: number,
     limit: number,
-    orderBy: string
+    orderBy: any
   ) {
     const count = await table.count({});
     const { take, skip, currentPage, lastPage } = this.paginationBuilder(
@@ -70,7 +79,7 @@ export class PaginationService {
     page: number,
     limit: number,
     search: string,
-    orderBy: string
+    orderBy: any
   ) {
     const where = search;
     const count = await table.count({ where });
@@ -99,12 +108,20 @@ export class PaginationService {
     page: number,
     limit: number,
     search: any,
-    orderBy: any
+    order: string,
+    sort: string
   ) {
+    let sortQuery = this.sortQueryBuilder(order, sort);
     if (this.checkSearch(search)) {
-      return this.getPagingDataWithoutSearch(table, page, limit, orderBy);
+      return this.getPagingDataWithoutSearch(table, page, limit, sortQuery);
     } else {
-      return this.getPagingDataWithSearch(table, page, limit, search, orderBy);
+      return this.getPagingDataWithSearch(
+        table,
+        page,
+        limit,
+        search,
+        sortQuery
+      );
     }
   }
 }
